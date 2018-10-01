@@ -1,0 +1,28 @@
+# https://bitbucket.org/francesco-asnicar/screenrc/src/master/
+# disable welcome message
+startup_message off
+
+# login shell
+shell -$SHELL
+
+# don't block command output if the terminal stops responding
+nonblock on
+
+# allow editors to restore display on exit
+altscreen on
+
+# lines of scrollback
+defscrollback 10000
+
+# automatically detach on SIGHUP
+autodetach on
+
+# screen title
+shelltitle "$ |bash "
+
+# think that the terminal doesn't have an alternate screen
+termcapinfo xterm* ti@:te@
+
+# statusbar
+hardstatus alwayslastline
+hardstatus string "%{= k}%{w}@%{y}%H %{w}on %{y}%D %d %M %C %a %{w}Load: %{y}%l %{R}| %{y}%-w%{G}%n %t%{y}%+w"
