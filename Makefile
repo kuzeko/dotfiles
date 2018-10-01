@@ -54,6 +54,14 @@ etc: ## Installs the etc directory files.
 sshk: ## generates SSH key if this is not already present
 	ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "john@example.com"
 
+.PHOY: installed
+installed: ## checks for commands to be installed
+	for cmd in 'screen' 'htop' 'gpg-connect-agent' 'gnupg2' 'docker'; do \
+		command -v $$cmd >/dev/null 2>&1 || { echo >&2 "$$cmd it's not installed."; } \
+	done
+
+
+
 .PHONY: test
 test: shellcheck ## Runs all the tests on the files in the repository.
 
