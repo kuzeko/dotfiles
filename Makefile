@@ -5,8 +5,10 @@ all: bin dotfiles etc ## Installs the bin directory files and the dotfiles but n
 bin: ## Installs the bin directory files.
 	# add aliases for things in bin
 	for file in $(shell find $(CURDIR)/bin -type f -not -name "*-backlight" -not -name ".*.swp"); do \
-		f=$$(basename $$file); \
-		sudo ln -sf $$file /usr/local/bin/$$f; \
+		if [ $(grep -fw "bin/$$file" $(CURDIR)/.excludes) -ne 0 ]; then \
+			f=$$(basename $$file); \
+			sudo ln -sf $$file /usr/local/bin/$$f; \
+		fi \
 	done
 
 .PHONY: dotfiles
