@@ -1,5 +1,5 @@
 .PHONY: all
-all: bin dotfiles etc ## Installs the bin directory files and the dotfiles but not etc because they are dangerous.
+all: bin dotfiles ## Installs the bin directory files and the dotfiles but not etc because they are dangerous.
 
 .PHONY: bin
 bin: ## Installs the bin directory files.
@@ -49,6 +49,10 @@ etc: ## Installs the etc directory files.
 	if [ -f /run/systemd/resolve/stub-resolv.conf ]; then \
 		sudo ln -snf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf \
 	fi
+
+.PHONY: sshk
+sshk: ## generates SSH key if this is not already present
+	ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "john@example.com"
 
 .PHONY: test
 test: shellcheck ## Runs all the tests on the files in the repository.
