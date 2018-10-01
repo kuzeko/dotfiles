@@ -1,5 +1,5 @@
 .PHONY: all
-all: bin dotfiles etc ## Installs the bin and etc directory files and the dotfiles.
+all: bin dotfiles etc ## Installs the bin directory files and the dotfiles but not etc because they are dangerous.
 
 .PHONY: bin
 bin: ## Installs the bin directory files.
