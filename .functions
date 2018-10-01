@@ -476,7 +476,7 @@ gitsetoriginnopush() {
 check_os(){
 	# Check OS System
 	local os='Uknown'
-	os=$(compgen -G "/etc/*release" > /dev/null) && cat /etc/*release | grep ^NAME | tr -d 'NAME="')  || $( echo "${OSTYPE//[0-9.]/}"
+	os=($(compgen -G "/etc/*release" > /dev/null) && cat /etc/*release | grep ^NAME | tr -d 'NAME="')  || $( echo "${OSTYPE//[0-9.]/}")
 
 	echo "$SO"
 }
