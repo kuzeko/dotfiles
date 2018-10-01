@@ -30,8 +30,17 @@ get_user() {
 
 check_is_sudo() {
 	if [ "$EUID" -ne 0 ]; then
-		echo "Please run as root."
-		exit
+		>&2  echo "Please run as root."
+		exit 1
+	fi
+}
+
+check_os(){
+	OS=$( $(compgen -G "/etc/*release" > /dev/null) && cat /etc/*release | grep ^NAME | tr -d 'NAME="')  || $( echo "${OSTYPE//[0-9.]/}")
+
+	if [ ! "$OS" == "Debian" ]; then
+		>&2  echo "This works only on Debian -- For now"
+		exit 2
 	fi
 }
 
@@ -581,6 +590,8 @@ main() {
 		usage
 		exit 1
 	fi
+
+	check_os
 
 	if [[ $cmd == "base" ]]; then
 		check_is_sudo
