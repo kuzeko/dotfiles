@@ -35,10 +35,14 @@ check_is_sudo() {
 	fi
 }
 
-check_os(){
-	OS=$( $(compgen -G "/etc/*release" > /dev/null) && cat /etc/*release | grep ^NAME | tr -d 'NAME="')  || $( echo "${OSTYPE//[0-9.]/}")
 
-	if [ ! "$OS" == "Debian" ]; then
+check_os(){
+	# Check OS System
+	local os='Uknown'
+	local unamestr="${OSTYPE//[0-9.]/}"
+	os=$( compgen -G "/etc/*release" > /dev/null  && cat /etc/*release | grep ^NAME | tr -d 'NAME="'  ||  echo "$unamestr")
+
+	if [ ! "$os" == "Debian" ]; then
 		>&2  echo "This works only on Debian -- For now"
 		exit 2
 	fi
