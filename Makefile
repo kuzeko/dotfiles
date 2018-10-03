@@ -64,8 +64,8 @@ requirements: ## Checks for commands to be installed.
 	for cmd in 'screen' 'htop' 'gpg-connect-agent' 'docker' 'xclip'; do \
 		command -v $$cmd >/dev/null 2>&1 || { echo >&2 "$$cmd it's not installed."; } \
 	done
-	## && [ $$cmd = docker ] && [ $$(echo $$is_ubuntu) -lt 17 ] && { echo "use the install_docker.md"; } ];\
-	ls "$(HOME)/.ssh/id_*" >/dev/null 2>&1 || echo "You need to setup SSH keys, use make keygen";
+	@## && [ $$cmd = docker ] && [ $$(echo $$is_ubuntu) -lt 17 ] && { echo "use the install_docker.md"; } ];\
+	ls $(HOME)/.ssh/id_* >/dev/null 2>&1 || echo "You need to setup SSH keys, use make keygen";
 
 .PHONY: config
 config: ## Shows how to configure basic stuff
