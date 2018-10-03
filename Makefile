@@ -52,7 +52,7 @@ etc: ## Installs the etc directory files.
 
 .PHONY: keygen
 keygen: ## Generates SSH key if this is not already present.
-	read -p "Email address? E.g., 'me@example.com'"  mailaddr
+	read -p "Email address? (E.g., 'me@example.com'): "  mailaddr
 	ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C $$mailaddr
 
 .PHOY: installed
