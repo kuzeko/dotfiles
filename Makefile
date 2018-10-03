@@ -33,6 +33,7 @@ dotfiles: ## Installs the dotfiles.
 	fi;
 	mkdir -p $(HOME)/Pictures;
 	ln -snf $(CURDIR)/central-park.jpg $(HOME)/Pictures/central-park.jpg;
+	@echo '.extra' >> .gitignore
 
 .PHONY: etc
 etc: ## Installs the etc directory files.
@@ -52,16 +53,25 @@ etc: ## Installs the etc directory files.
 
 .PHONY: keygen
 keygen: ## Generates SSH key if this is not already present.
-	read -p "Email address? (E.g., 'me@example.com'): "  mailaddr
-	ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C $$mailaddr
+	mailaddr=$$(grep -e '^GMAIL=' .extra | sed -e 's|GMAIL=||');
+	@echo "Mail address set t $$mailaddr in .extra"
+	ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "$( echo $$mailaddr)/
 
-.PHOY: installed
+.PHONY: installed
 installed: ## Checks for commands to be installed.
 	for cmd in 'screen' 'htop' 'gpg-connect-agent' 'gnupg2' 'docker' 'xclip'; do \
 		command -v $$cmd >/dev/null 2>&1 || { echo >&2 "$$cmd it's not installed."; } \
 	done
 
-
+.PHONY: config
+config: ## Shows how to configure basic stuff
+	@echo "Configure .excludes file";
+	@echo ""
+	@sed -e 's/#//' .excludes;
+	@echo ""
+	@echo "Configure .extra file"
+	@echo ""
+	@sed -e 's/#//' .extra;
 
 .PHONY: test
 test: shellcheck ## Runs all the tests on the files in the repository.
