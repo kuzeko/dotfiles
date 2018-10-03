@@ -53,9 +53,10 @@ etc: ## Installs the etc directory files.
 
 .PHONY: keygen
 keygen: ## Generates SSH key if this is not already present.
-	mailaddr=$$(grep -e '^GMAIL=' .extra | sed -e 's|GMAIL=||');
-	@echo "Mail address set t $$mailaddr in .extra"
-	ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "$( echo $$mailaddr)/
+	mailaddr=$$(grep -e 'export GMAIL=' .extra | sed -e 's|export GMAIL=||'); \
+	echo "Mail address set to $$mailaddr in .extra"; \
+	ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519X -C  $$(echo $$mailaddr)
+
 
 .PHONY: installed
 installed: ## Checks for commands to be installed.
@@ -66,12 +67,12 @@ installed: ## Checks for commands to be installed.
 .PHONY: config
 config: ## Shows how to configure basic stuff
 	@echo "Configure .excludes file";
-	@echo ""
-	@sed -e 's/#//' .excludes;
-	@echo ""
+	@echo "";
+	@sed -e 's/# //' .excludes;
+	@echo "";
 	@echo "Configure .extra file"
-	@echo ""
-	@sed -e 's/#//' .extra;
+	@echo "";
+	@sed -e 's/# //' .extra;
 
 .PHONY: test
 test: shellcheck ## Runs all the tests on the files in the repository.
