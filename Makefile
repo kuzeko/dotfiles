@@ -62,7 +62,7 @@ keygen: ## Generates SSH key if this is not already present.
 requirements: ## Checks for commands to be installed.
 	is_ubuntu=$$( grep -q "Ubuntu" /etc/*release &> /dev/null && cat /etc/*release | grep ^VERSION | tr -d 'VERSION="' | head -c 2); \
 	for cmd in 'screen' 'htop' 'gpg-connect-agent' 'docker' 'xclip'; do \
-		command -v $$cmd >/dev/null 2>&1 || [ { echo >&2 "$$cmd it's not installed."; } \
+		command -v $$cmd >/dev/null 2>&1 || { echo >&2 "$$cmd it's not installed."; } \
 	done
 	## && [ $$cmd = docker ] && [ $$(echo $$is_ubuntu) -lt 17 ] && { echo "use the install_docker.md"; } ];\
 	ls "$(HOME)/.ssh/id_*" >/dev/null 2>&1 || echo "You need to setup SSH keys, use make keygen";
