@@ -142,6 +142,7 @@ alias prikey="more ~/.ssh/id_ed25519 | xclip -selection clipboard | echo '=> Pri
 alias osxclean="find . -type f -name '*.DS_Store' -ls -delete"
 
 # My Git aliases
+alias gcheckout='git commit'
 alias gcommit='git commit'
 alias gpush='git push'
 alias gpull='git pull'
