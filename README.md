@@ -2,7 +2,7 @@
 
 [![Travis CI](https://travis-ci.org/kuzeko/dotfiles.svg?branch=master)](https://travis-ci.org/kuzeko/dotfiles)
 
-**To install:**
+### To install:
 
 ```console
 $ make
@@ -20,7 +20,7 @@ $ make etc
 ```
 
 
-**To customize:**
+### To customize:
 
 Save env vars, etc in a `.extra` file, that looks something like
 this:
@@ -47,10 +47,27 @@ export GMAIL_NAME="Your Name"
 export GMAIL_FROM=from-email@you.com
 ```
 
+### Here be Dragons
+
+This repo is full of features, opinionated confings, scripts, and functions.
+I've broken a couple of them after forking (see the `/etc` case).
+Each file is fairly documented, if you can understand what the comment is saying.
+
+Things may break unexpectedly because some file somewhere in this repo is overriding some default, you are warned.
+Yet, a lot of useful things are introduced, you should really look around (maybe on the original repo).
+Every time I do it, I learn something new!
+
 #### `.vim`
 
 For `jessfraz` `.vimrc` and `.vim` dotfiles see
 [github.com/jessfraz/.vim](https://github.com/jessfraz/.vim).
+
+
+#### `.nanorc`
+
+This repo embeds conf files for `nano`.
+Yes, I'm not taking any part in the ``Editor War'': when I code, I don't do it in a terminal.
+
 
 ### Tests
 
