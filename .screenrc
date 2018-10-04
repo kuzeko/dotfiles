@@ -1,4 +1,6 @@
+# Forked from
 # https://bitbucket.org/francesco-asnicar/screenrc/src/master/
+
 # disable welcome message
 startup_message off
 
@@ -25,4 +27,6 @@ termcapinfo xterm* ti@:te@
 
 # statusbar
 hardstatus alwayslastline
-hardstatus string "%{= k}%{w}@%{y}%H %{w}on %{y}%D %d %M %C %a %{w}Load: %{y}%l %{R}| %{y}%-w%{G}%n %t%{y}%+w"
+# statusbar
+hardstatus alwayslastline
+hardstatus string "%{= k}%{r}[ %{G}%H %{r}] [ %{y}%-w%=%{B}%n %t%=%{y}%+w %{r}] [ %{Y}Load: %l %{r}] [ %{W}%D %d %M %C %a %{r}]"
