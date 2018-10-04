@@ -1,0 +1,16 @@
+syntax "coffeescript" "\.coffee$"
+
+color red "[!&|=/*+-<>]|\<(and|or|is|isnt|not)\>"
+color brightblue "[A-Za-z_][A-Za-z0-9_]*:[[:space:]]*(->|\()" "->"
+color green    "[()]"
+color brightmagenta  "\<(for|of|continue|break|isnt|null|unless|this|else|if|return)\>"
+color brightmagenta  "\<(try|catch|finally|throw|new|delete|typeof|in|instanceof)\>"
+color brightmagenta  "\<(debugger|switch|while|do|class|extends|super)\>"
+color brightmagenta  "\<(undefined|then|unless|until|loop|of|by|when)\>"
+color brightcyan  "\<(true|false|yes|no|on|off)\>"
+color brightblue "@[A-Za-z0-9_]*"
+color yellow ""(\\.|[^"])*"|'(\\.|[^'])*'"
+color cyan "(^|[[:space:]])#([^{].*)?$"
+color ,green "[[:space:]]+$"
+color ,red "	+ +| +	+"
+# +EXTRALINT

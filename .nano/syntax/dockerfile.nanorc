@@ -1,0 +1,39 @@
+## Syntax highlighting for Dockerfiles
+syntax "Dockerfile" "Dockerfile[^/]*$" "\.dockerfile"
+
+
+## Double ampersand
+color red "(\(|\)|\[|\])"
+
+
+color brightblue "(\$|\$\{|^)?[A-Z_]+(\}|[^A-Z_])"
+color brightblue "\$\{" "\}"
+
+
+## End LINE
+color brightred "\\$"
+
+
+## Keywords
+color brightmagenta "^(ONBUILD\s+)?(ADD|ARG|CMD|COPY|ENTRYPOINT|ENV|EXPOSE|FROM|HEALTHCHECK|LABEL|MAINTAINER|RUN|SHELL|STOPSIGNAL|USER|VOLUME|WORKDIR)[[:space:]]"
+
+
+## Strings, single-quoted
+color yellow "'([^']|(\\'))*'" "%[qw]\{[^}]*\}" "%[qw]\([^)]*\)" "%[qw]<[^>]*>" "%[qw]\[[^]]*\]" "%[qw]\$[^$]*\$" "%[qw]\^[^^]*\^" "%[qw]![^!]*!"
+
+## Strings, double-quoted
+color yellow ""([^"]|(\\"))*"" "%[QW]?\{[^}]*\}" "%[QW]?\([^)]*\)" "%[QW]?<[^>]*>" "%[QW]?\[[^]]*\]" "%[QW]?\$[^$]*\$" "%[QW]?\^[^^]*\^" "%[QW]?![^!]*!"
+
+## Double ampersand
+color red "&&"
+
+
+## Comments
+color cyan "(^|[[:space:]])#([^{].*)?$"
+
+color brightwhite,cyan "TODO:?"
+
+color ,green "[[:space:]]+$"
+color ,red "	+ +| +	+"
+# +EXTRALINT
+

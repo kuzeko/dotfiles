@@ -1,0 +1,9 @@
+syntax "yum" "\.repo$|yum.*\.conf$"
+
+color brightmagenta "^[[:space:]]*[^=]*="
+color brightmagenta "^[[:space:]]*\[.*\]$"
+color brightblue "\$(releasever|arch|basearch|uuid|YUM[0-9])"
+color cyan "(^|[[:space:]])#([^{].*)?$"
+color ,green "[[:space:]]+$"
+color ,red "	+ +| +	+"
+# +EXTRALINT

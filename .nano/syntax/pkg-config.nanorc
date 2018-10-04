@@ -1,0 +1,9 @@
+syntax "pkg-config" "\.pc$"
+
+color brightmagenta  "^(Name|Description|URL|Version|Conflicts|Cflags):"
+color brightmagenta  "^(Requires|Libs)(\.private)?:"
+color red "="
+color brightblue "\$\{[A-Za-z_][A-Za-z0-9_]*\}"
+color ,green "[[:space:]]+$"
+color ,red "	+ +| +	+"
+# +EXTRALINT
