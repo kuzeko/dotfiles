@@ -1,5 +1,5 @@
 .PHONY: all
-all: bin dotfiles requirements config## Installs the bin directory files and the dotfiles but not etc because they are dangerous.
+all: bin dotfiles requirements config ## Installs the bin directory files and the dotfiles but not etc because they are dangerous.
 
 .PHONY: bin
 bin: ## Installs the bin directory files.
@@ -61,7 +61,7 @@ keygen: ## Generates SSH key if this is not already present.
 .PHONY: requirements
 requirements: ## Checks for commands to be installed.
 	is_ubuntu=$$( grep -q "Ubuntu" /etc/*release &> /dev/null && cat /etc/*release | grep ^VERSION | tr -d 'VERSION="' | head -c 2); \
-	for cmd in 'screen' 'htop' 'gpg-connect-agent' 'docker' 'xclip'; do \
+	for cmd in 'screen' 'htop' 'gpg-connect-agent' 'docker' 'xclip' 'unzip'; do \
 		command -v $$cmd >/dev/null 2>&1 || { echo >&2 "$$cmd it's not installed."; } \
 	done
 	@## && [ $$cmd = docker ] && [ $$(echo $$is_ubuntu) -lt 17 ] && { echo "use the install_docker.md"; } ];\

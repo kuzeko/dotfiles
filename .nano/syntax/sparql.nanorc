@@ -1,0 +1,65 @@
+syntax "sparql" "\.sparql$"
+
+# UPPERCASE
+
+icolor brightmagenta "\<(ALL|ASC|AS|ALTER|AND|ADD|AUTO_INCREMENT)\>"
+icolor brightmagenta "\<(BETWEEN|BINARY|BOTH|BY|BOOLEAN)\>"
+icolor brightmagenta "\<(CHANGE|CHECK|COLUMNS|COLUMN|CROSS|CREATE)\>"
+icolor brightmagenta "\<(DATABASES|DATABASE|DATA|DELAYED|DESCRIBE|DESC|DISTINCT|DELETE|DROP|DEFAULT)\>"
+icolor brightmagenta "\<(ENCLOSED|ESCAPED|EXISTS|EXPLAIN)\>"
+icolor brightmagenta "\<(FIELDS|FIELD|FILTER|FLUSH|FOR|FOREIGN|FUNCTION|FROM)\>"
+icolor brightmagenta "\<(GROUP|GRANT|HAVING)\>"
+icolor brightmagenta "\<(IGNORE|INDEX|INFILE|INSERT|INNER|INTO|IDENTIFIED|IN|IS|IF)\>"
+icolor brightmagenta "\<(JOIN|KEYS|KILL|KEY)\>"
+icolor brightmagenta "\<(LEADING|LIKE|LIMIT|LINES|LOAD|LOCAL|LOCK|LOW_PRIORITY|LEFT|LANGUAGE)\>"
+icolor brightmagenta "\<(MODIFY|NATURAL|NOT|NULL|NEXTVAL)\>"
+icolor brightmagenta "\<(OPTIMIZE|OPTION|OPTIONALLY|ORDER|OUTFILE|OR|OUTER|ON)\>"
+icolor brightmagenta "\<(PROCEDURE|PROCEDURAL|PRIMARY)\>"
+icolor brightmagenta "\<(READ|REFERENCES|REGEXP|RENAME|REPLACE|RETURN|REVOKE|RLIKE|RIGHT)\>"
+icolor brightmagenta "\<(SHOW|SONAME|STATUS|STRAIGHT_JOIN|SELECT|SETVAL|SET|SUM)\>"
+icolor brightmagenta "\<(TABLES|TERMINATED|TO|TRAILING|TRUNCATE|TABLE|TEMPORARY|TRIGGER|TRUSTED)\>"
+icolor brightmagenta "\<(UNIQUE|UNLOCK|USE|USING|UPDATE|VALUES|VARIABLES|VIEW)\>"
+icolor brightmagenta "\<(WITH|WRITE|WHERE|ZEROFILL|TYPE|XOR)\>"
+color green     "\<(VARCHAR|TINYINT|TEXT|DATE|SMALLINT|MEDIUMINT|INT|INTEGER|BIGINT|FLOAT|DOUBLE|DECIMAL|DATETIME|TIMESTAMP|TIME|YEAR|UNSIGNED|CHAR|TINYBLOB|TINYTEXT|BLOB|MEDIUMBLOB|MEDIUMTEXT|LONGBLOB|LONGTEXT|ENUM|BOOL|BINARY|VARBINARY)\>"
+color green     "PREFIX"
+
+# Lowercase
+
+icolor brightmagenta "\<(all|asc|as|alter|and|add|auto_increment)\>"
+icolor brightmagenta "\<(between|binary|both|by|boolean)\>"
+icolor brightmagenta "\<(change|check|columns|column|cross|create)\>"
+icolor brightmagenta "\<(databases|database|data|delayed|describe|desc|distinct|delete|drop|default)\>"
+icolor brightmagenta "\<(enclosed|escaped|exists|explain)\>"
+icolor brightmagenta "\<(fields|field|filter|flush|for|foreign|function|from)\>"
+icolor brightmagenta "\<(group|grant|having)\>"
+icolor brightmagenta "\<(ignore|index|infile|insert|inner|into|identified|in|is|if)\>"
+icolor brightmagenta "\<(join|keys|kill|key)\>"
+icolor brightmagenta "\<(leading|like|limit|lines|load|local|lock|low_priority|left|language)\>"
+icolor brightmagenta "\<(modify|natural|not|null|nextval)\>"
+icolor brightmagenta "\<(optimize|option|optionally|order|outfile|or|outer|on)\>"
+icolor brightmagenta "\<(procedure|procedural|primary)\>"
+icolor brightmagenta "\<(read|references|regexp|rename|replace|return|revoke|rlike|right)\>"
+icolor brightmagenta "\<(show|soname|status|straight_join|select|setval|set|sum)\>"
+icolor brightmagenta "\<(tables|terminated|to|trailing|truncate|table|temporary|trigger|trusted)\>"
+icolor brightmagenta "\<(unique|unlock|use|using|update|values|variables|view)\>"
+icolor brightmagenta "\<(with|write|where|zerofill|type|xor)\>"
+color green     "\<(varchar|tinyint|text|date|smallint|mediumint|int|integer|bigint|float|double|decimal|datetime|timestamp|time|year|unsigned|char|tinyblob|tinytext|blob|mediumblob|mediumtext|longblob|longtext|enum|bool|binary|varbinary)\>"
+
+
+
+
+# SQLite meta commands
+icolor brightmagenta "\.\<(databases|dump|echo|exit|explain|header(s)?|help)\>"
+icolor brightmagenta "\.\<(import|indices|mode|nullvalue|output|prompt|quit|read)\>"
+icolor brightmagenta "\.\<(schema|separator|show|tables|timeout|width)\>"
+color brightcyan  "\<(ON|OFF)\>"
+
+color blue   "\<([0-9]+)\>"
+color blue   "\<([a-zA-Z_][a-zA-Z_0-9]*:[a-zA-Z_][a-zA-Z_0-9]*\)>"
+color yellow ""(\\.|[^"])*"|'(\\.|[^'])*'"
+color yellow   "`(\\.|[^\\`])*`"
+color yellow   "\<(\?[a-zA-Z_][a-zA-Z_0-9]*\)>"
+color cyan  "\-\-.*$"
+color ,green "[[:space:]]+$"
+color ,red "	+ +| +	+"
+# +EXTRALINT
