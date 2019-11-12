@@ -48,7 +48,7 @@ for repo in "${repos[@]}"; do
 		shas=( "${shas[@]/$id}" )
 
 		# shellcheck disable=SC2199
-		if [[ "${shas[@]}" != "" ]] && [[ ! -z "${shas[@]}" ]]; then
+		if [[ "${shas[@]}" != "" ]] && [[ -n "${shas[@]}" ]]; then
 			parallel -j"${JOBS}" reg rm "${REPO_URL}/${repo}@${ha}:{1}" ::: "${shas[@]}" || true
 		fi
 	done
