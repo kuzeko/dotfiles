@@ -1,19 +1,5 @@
 #!/bin/bash
 
-# Check for various OS openers. Quit as soon as we find one that works.
-for opener in browser-exec xdg-open cmd.exe cygstart "start" open; do
-	if command -v $opener >/dev/null 2>&1; then
-		if [[ "$opener" == "cmd.exe" ]]; then
-			# shellcheck disable=SC2139
-			alias open="$opener /c start";
-		else
-			# shellcheck disable=SC2139
-			alias open="$opener";
-		fi
-		break;
-	fi
-done
-
 # Linux specific aliases
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
@@ -142,6 +128,8 @@ alias pubkey="cat ~/.ssh/id_ed25519.pub"
 # Mac OSX Stupid files
 alias osxclean="find . -type f -name '*.DS_Store' -ls -delete"
 
+alias sshpwd="ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no"
+
 # My Git aliases
 alias gcheckout='git checkout'
 alias gcommit='git commit'
@@ -149,3 +137,8 @@ alias gpush='git push'
 alias gpull='git pull'
 alias gstatus='git status'
 alias gadd='git add'
+
+# Open a webserver in the current directory (python2 version)
+# for python 2 use python -m SimpleHTTPServer 80
+alias webserver='python3 -m http.server 80'
+
