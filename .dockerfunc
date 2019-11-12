@@ -380,6 +380,23 @@ keypassxc(){
 		--name keypassxc \
 		${DOCKER_REPO_PREFIX}/keepassxc
 }
+kicad(){
+	del_stopped kicad
+
+	docker run -d \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		-e "DISPLAY=unix${DISPLAY}" \
+		-v "${HOME}/kicad:/root/kicad" \
+		-v "${HOME}/.cache/kicad:/root/.cache/kicad" \
+		-v "${HOME}/.config/kicad:/root/.config/kicad" \
+		-e QT_DEVICE_PIXEL_RATIO \
+		-e GDK_SCALE \
+		-e GDK_DPI_SCALE \
+		--device /dev/dri \
+		--name kicad \
+		${DOCKER_REPO_PREFIX}/kicad
+}
 kvm(){
 	del_stopped kvm
 	relies_on pulseaudio
@@ -570,6 +587,22 @@ now(){
 		--workdir /usr/src/repo \
 		--log-driver none \
 		${DOCKER_REPO_PREFIX}/now "$@"
+}
+openscad(){
+	del_stopped openscad
+
+	docker run -d \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		-e "DISPLAY=unix${DISPLAY}" \
+		-v "${HOME}/openscad:/root/openscad" \
+		-v "${HOME}/.config/OpenSCAD:/root/.config/OpenSCAD" \
+		-e QT_DEVICE_PIXEL_RATIO \
+		-e GDK_SCALE \
+		-e GDK_DPI_SCALE \
+		--device /dev/dri \
+		--name openscad \
+		${DOCKER_REPO_PREFIX}/openscad
 }
 opensnitch(){
 	del_stopped opensnitchd
@@ -1053,6 +1086,17 @@ virsh(){
 		--net container:kvm \
 		${DOCKER_REPO_PREFIX}/libvirt-client "$@"
 }
+virtualbox(){
+	del_stopped virtualbox
+
+	docker run -d \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		-e "DISPLAY=unix${DISPLAY}" \
+		--privileged \
+		--name virtualbox \
+		${DOCKER_REPO_PREFIX}/virtualbox
+}
 virt_viewer(){
 	relies_on kvm
 
@@ -1109,8 +1153,30 @@ watchman(){
 		--name watchman \
 		${DOCKER_REPO_PREFIX}/watchman --foreground
 }
+weematrix(){
+	del_stopped weematrix
+
+	docker run --rm -it \
+		--user root \
+		-v "${HOME}/.weechat:/home/user/.weechat" \
+		${DOCKER_REPO_PREFIX}/weechat-matrix \
+		chown -R user /home/user/.weechat
+
+	docker run --rm -it \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v "${HOME}/.weechat:/home/user/.weechat" \
+		-e "TERM=screen" \
+		--name weematrix \
+		${DOCKER_REPO_PREFIX}/weechat-matrix
+}
 weeslack(){
 	del_stopped weeslack
+
+	docker run --rm -it \
+		--user root \
+		-v "${HOME}/.weechat:/home/user/.weechat" \
+		${DOCKER_REPO_PREFIX}/wee-slack \
+		chown -R user /home/user/.weechat
 
 	docker run --rm -it \
 		-v /etc/localtime:/etc/localtime:ro \
