@@ -4,7 +4,12 @@
 
 ### To install:
 
+Clone the repo, switch to a local branch where you can do local edits, and run `make`
+
 ```console
+$ git clone https://github.com/kuzeko/dotfiles.git
+$ cd dotfiles
+$ git checkout -b local
 $ make
 ```
 
@@ -47,6 +52,19 @@ export GMAIL_NAME="Your Name"
 export GMAIL_FROM=from-email@you.com
 ```
 
+### Missing applications
+
+During installation the `requirements` entrypoint is also performed, this will check if commons utilities are installed.
+If missing, you should install them.
+
+For Docker on ubuntu you can check [this handy little guide](install_docker.md).
+
+
+### SSH Keygen
+
+You can run `make keygen` entrypoint to have a SSH key generated based on the infos in the `.extra` file.
+The key will be a of type `ed25519`
+
 ### Here be Dragons
 
 This repo is full of features, opinionated confings, scripts, and functions.
@@ -56,6 +74,9 @@ Each file is fairly documented, if you can understand what the comment is saying
 Things may break unexpectedly because some file somewhere in this repo is overriding some default, you are warned.
 Yet, a lot of useful things are introduced, you should really look around (maybe on the original repo).
 Every time I do it, I learn something new!
+
+
+### Other Configuratations
 
 #### `.vim`
 
