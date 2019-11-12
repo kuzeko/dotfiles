@@ -13,6 +13,8 @@ bin: ## Installs the bin directory files.
 
 .PHONY: dotfiles
 dotfiles: ## Installs the dotfiles.
+	# Clean any macOs DS_Store file first
+	find . -type f -name '*.DS_Store' -ls -delete
 	# add aliases for dotfiles
 	for file in $(shell find $(CURDIR) -name ".*" -not -name ".gitignore" -not -name ".travis.yml" -not -name ".git" -not -name ".*.swp" -not -name ".gnupg"); do \
 		f=$$(basename $$file); \
@@ -55,13 +57,13 @@ etc: ## Installs the etc directory files.
 keygen: ## Generates SSH key if this is not already present.
 	mailaddr=$$(grep -e 'export GMAIL=' .extra | sed -e 's|export GMAIL=||'); \
 	echo "Mail address set to $$mailaddr in .extra"; \
-	ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519X -C  $$(echo $$mailaddr)
+	ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C  $$(echo $$mailaddr)
 
 
 .PHONY: requirements
 requirements: ## Checks for commands to be installed.
 	is_ubuntu=$$( grep -q "Ubuntu" /etc/*release &> /dev/null && cat /etc/*release | grep ^VERSION | tr -d 'VERSION="' | head -c 2); \
-	for cmd in 'screen' 'htop' 'gpg-connect-agent' 'docker' 'xclip' 'unzip'; do \
+	for cmd in 'mapfile' 'screen' 'htop' 'gpg-connect-agent' 'docker' 'xclip' 'unzip'; do \
 		command -v $$cmd >/dev/null 2>&1 || { echo >&2 "$$cmd it's not installed."; } \
 	done
 	@## && [ $$cmd = docker ] && [ $$(echo $$is_ubuntu) -lt 17 ] && { echo "use the install_docker.md"; } ];\
