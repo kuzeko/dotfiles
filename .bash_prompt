@@ -62,7 +62,7 @@ prompt_git() {
 	fi;
 }
 
-emoji=""
+emoji="🛡️ "
 if [[ -f /proc/cpuinfo ]] && grep -q "^flags.* hypervisor" /proc/cpuinfo && [[ ! -d "/mnt/c/Windows/" ]]; then
 	emoji="⚡️ "
 fi
