@@ -42,16 +42,16 @@ dotfiles: ## Installs the dotfiles.
 
 	@echo '.extra' >> .gitignore
 
-	mkdir -p $(HOME)/.config/fontconfig;
-	ln -snf $(CURDIR)/.config/fontconfig/fontconfig.conf $(HOME)/.config/fontconfig/fontconfig.conf;
-	xrdb -merge $(HOME)/.Xdefaults || true
-	xrdb -merge $(HOME)/.Xresources || true
-	fc-cache -f -v || true
-
-	# https://github.com/systemd/systemd/issues/9450
-	if [ -f /run/systemd/resolve/stub-resolv.conf ]; then \
-		sudo ln -snf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf \
+	if command -v xrdb &> /dev/null; then
+		mkdir -p $(HOME)/.config/fontconfig;
+		ln -snf $(CURDIR)/.config/fontconfig/fontconfig.conf $(HOME)/.config/fontconfig/fontconfig.conf;
+	 	-merge $(HOME)/.Xdefaults || true
+		xrdb -merge $(HOME)/.Xresources || true
+		fc-cache -f -v || true
 	fi
+
+
+
 
 # Get the laptop's model number so we can generate xorg specific files.
 LAPTOP_XORG_FILE=/etc/X11/xorg.conf.d/10-dell-xps-display.conf
@@ -65,6 +65,12 @@ etc: ## Installs the etc directory files.
 		sudo mkdir -p $$(dirname $$f); \
 		sudo ln -f $$file $$f; \
 	done
+
+	# https://github.com/systemd/systemd/issues/9450
+	if [ -f /run/systemd/resolve/stub-resolv.conf ]; then \
+		sudo ln -snf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+	fi
+
 	systemctl --user daemon-reload || true
 	sudo systemctl daemon-reload
 	sudo systemctl enable systemd-networkd systemd-resolved
