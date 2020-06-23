@@ -1,8 +1,26 @@
-## dotfiles
+# dotfiles
 
-[![Travis CI](https://travis-ci.org/kuzeko/dotfiles.svg?branch=master)](https://travis-ci.org/kuzeko/dotfiles)
 
-### To install:
+[![Travis CI make test](https://travis-ci.org/kuzeko/dotfiles.svg?branch=master)](https://travis-ci.org/kuzeko/dotfiles)
+
+**Table of Contents**
+
+<!-- toc -->
+
+- [To install](#to-install)
+- [Customizing](#customizing)
+- [Missing applications](#missing-applications)
+- [SSH Keygen](#ssh-keygen)
+- [Here be Dragons](#here-be-dragons)
+- [Other Configuratations](#other-configuratations)
+  * [`.vim`](#vim)
+  * [`.nanorc`](#nanorc)
+- [Tests](#tests)  
+
+<!-- tocstop -->
+
+
+## To install:
 
 Clone the repo, switch to a local branch where you can do local edits, and run `make`
 
@@ -15,6 +33,7 @@ $ make
 
 This will create symlinks from this repo to your home folder.
 
+
 This repo contains also files/configurations to be deployed globally in the `etc` directory.
 They may be dangerous for your system, please review the contents in the `etc/`folder before proceeding (e.g., check `etc/ssh/`).
 
@@ -25,7 +44,7 @@ $ make etc
 ```
 
 
-### To customize:
+## Customizing
 
 Save env vars, etc in a `.extra` file, that looks something like
 this:
@@ -52,7 +71,8 @@ export GMAIL_NAME="Your Name"
 export GMAIL_FROM=from-email@you.com
 ```
 
-### Missing applications
+
+## Missing applications
 
 During installation the `requirements` entrypoint is also performed, this will check if commons utilities are installed.
 If missing, you should install them.
@@ -60,12 +80,12 @@ If missing, you should install them.
 For Docker on ubuntu you can check [this handy little guide](install_docker.md).
 
 
-### SSH Keygen
+## SSH Keygen
 
 You can run `make keygen` entrypoint to have a SSH key generated based on the infos in the `.extra` file.
 The key will be a of type `ed25519`
 
-### Here be Dragons
+## Here be Dragons
 
 This repo is full of features, opinionated confings, scripts, and functions.
 I've broken a couple of them after forking (see the `/etc` case).
@@ -76,21 +96,21 @@ Yet, a lot of useful things are introduced, you should really look around (maybe
 Every time I do it, I learn something new!
 
 
-### Other Configuratations
+## Other Configuratations
 
-#### `.vim`
+### `.vim`
 
 For `jessfraz` `.vimrc` and `.vim` dotfiles see
 [github.com/jessfraz/.vim](https://github.com/jessfraz/.vim).
 
 
-#### `.nanorc`
+### `.nanorc`
 
 This repo embeds conf files for `nano`.
 Yes, I'm not taking any part in the ``Editor War'': when I code, I don't do it in a terminal.
 
 
-### Tests
+## Tests
 
 The tests use [shellcheck](https://github.com/koalaman/shellcheck). You don't
 need to install anything. They run in a container.
