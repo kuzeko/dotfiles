@@ -24,6 +24,7 @@ dotfiles: ## Installs the dotfiles.
 	ln -sfn $(CURDIR)/.gnupg/gpg.conf $(HOME)/.gnupg/gpg.conf;
 	ln -sfn $(CURDIR)/.gnupg/gpg-agent.conf $(HOME)/.gnupg/gpg-agent.conf;
 	ln -fn $(CURDIR)/gitignore $(HOME)/.gitignore;
+	ln -sfn $(CURDIR)/.gittemplates $(HOME)/.gittemplates;
 	git update-index --skip-worktree $(CURDIR)/.gitconfig;
 	mkdir -p $(HOME)/.config;
 	ln -snf $(CURDIR)/.i3 $(HOME)/.config/sway;
