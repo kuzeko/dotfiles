@@ -10,9 +10,5 @@ for file in ~/.{functions,bashrc,bash_prompt,aliases,path,dockerfunc,extra,expor
 done
 unset file
 
-export PATH="$HOME/.cargo/bin:$PATH"
 
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/kuzeko/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
