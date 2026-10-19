@@ -80,14 +80,24 @@ shared home belongs to everyone who logs in.
 
 ## Your git identity
 
-Set it once per session, before your first commit:
+Once, store your name and email under a short name of your choice, one per
+line:
 
 ```console
-iam "Your Name" you@example.com
+mkdir -p ~/.iam
+printf '%s\n' "Your Name" you@example.com > ~/.iam/<short-name>
 ```
 
-It lasts until you log out and is visible to your session only. Without it,
-git stops with "Author identity unknown".
+Then, after each login and before your first commit:
+
+```console
+iam <short-name>
+```
+
+`iam "Your Name" you@example.com` also works without the file. Run `iam`
+alone to list the short names already stored. The identity lasts until you
+log out and is visible to your session only. Without it, git stops with
+"Author identity unknown".
 
 Never run `git config --global user.name` or `user.email` on the server, nor
 `git config user.*` inside a shared clone: both set the identity for everyone
@@ -98,11 +108,24 @@ Commits made on the server are unsigned.
 ## Sharing the account
 
 - Bash history is shared. Never type a password or token on the command line.
-- Name your tmux session after yourself, and reattach to it by name:
+- Work in a `screen` or `tmux` session of your own, and run `iam` before
+  starting it: every window in it then has your identity, it survives a
+  dropped connection, and reattaching saves typing `iam` again.
+
+  With screen:
 
   ```console
-  tmux new -s <your-name>
-  tmux attach -t <your-name>
+  screen -S <your-name>
+  screen -r <your-name>
+  ```
+
+  With tmux, always pass `-L <your-name>`. Without it, everyone on the
+  account shares one tmux server, and a new session can inherit the git
+  identity of whoever started that server:
+
+  ```console
+  tmux -L <your-name> new -s <your-name>
+  tmux -L <your-name> attach
   ```
 
 - Change the dotfiles through a pull request on the repository, not by editing
