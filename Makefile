@@ -99,9 +99,11 @@ keygen: ## Generates SSH key if this is not already present.
 
 .PHONY: requirements
 requirements: ## Checks for commands to be installed.
+	@missing=0; \
 	for cmd in 'mapfile' 'screen' 'htop' 'gpg-connect-agent' 'unzip' $(if $(filter desktop,$(PROFILE)),'docker' 'xclip'); do \
-		command -v $$cmd >/dev/null 2>&1 || { echo >&2 "$$cmd it's not installed."; } \
-	done
+		command -v $$cmd >/dev/null 2>&1 || { echo >&2 "$$cmd is not installed."; missing=1; } \
+	done; \
+	if [ $$missing -eq 0 ]; then echo "All required commands are installed."; fi
 ifeq ($(PROFILE), desktop)
 	@ls $(HOME)/.ssh/id_* >/dev/null 2>&1 || echo "You need to setup SSH keys, use make keygen";
 endif
