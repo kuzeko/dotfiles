@@ -106,6 +106,8 @@ requirements: ## Checks for commands to be installed.
 	if [ $$missing -eq 0 ]; then echo "All required commands are installed."; fi
 ifeq ($(PROFILE), desktop)
 	@ls $(HOME)/.ssh/id_* >/dev/null 2>&1 || echo "You need to setup SSH keys, use make keygen";
+else
+	@command -v docker >/dev/null 2>&1 || echo "Suggested, not required: docker is not installed, see https://docs.docker.com/engine/install/"
 endif
 
 .PHONY: config

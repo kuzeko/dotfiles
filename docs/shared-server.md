@@ -25,7 +25,10 @@ make requirements
 ```
 
 `make requirements` names each missing command, or prints "All required
-commands are installed." Install whatever it names, then run:
+commands are installed." It also suggests Docker when it is missing; the
+dotfiles work without it. If you install it, note that adding the shared
+account to the `docker` group gives everyone on it root-equivalent access.
+Install whatever it names as required, then run:
 
 ```console
 make dotfiles
