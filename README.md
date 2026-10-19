@@ -1,6 +1,5 @@
 ## dotfiles
 
-[![Travis CI](https://travis-ci.org/kuzeko/dotfiles.svg?branch=master)](https://travis-ci.org/kuzeko/dotfiles)
 [![make test](https://github.com/kuzeko/dotfiles/actions/workflows/make-test.yml/badge.svg)](https://github.com/kuzeko/dotfiles/actions/workflows/make-test.yml)
 
 ### To install:
@@ -15,6 +14,16 @@ $ make
 ```
 
 This will create symlinks from this repo to your home folder.
+
+On Linux, `make` installs the server profile: shell and git configuration
+only. For a Linux desktop with X11 and i3, run:
+
+```console
+make PROFILE=desktop
+```
+
+For a server account that several people log into, follow
+[docs/shared-server.md](docs/shared-server.md) instead.
 
 This repo contains also files/configurations to be deployed globally in the `etc` directory.
 They may be dangerous for your system, please review the contents in the `etc/`folder before proceeding (e.g., check `etc/ssh/`).

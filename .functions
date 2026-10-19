@@ -264,13 +264,13 @@ repo() {
 	# Validate that this folder is a git folder
 	if ! git branch 2>/dev/null 1>&2 ; then
 		echo "Not a git repo!"
-		exit $?
+		return 1
 	fi
 
 	# Find current directory relative to .git parent
 	full_path=$(pwd)
 	git_base_path=$(cd "./$(git rev-parse --show-cdup)" || exit 1; pwd)
-	relative_path=${full_path#$git_base_path} # remove leading git_base_path from working directory
+	relative_path=${full_path#"$git_base_path"} # remove leading git_base_path from working directory
 
 	# If filename argument is present, append it
 	if [ "$1" ]; then
@@ -283,6 +283,7 @@ repo() {
 
 	# Remove cruft from branchname
 	branch=${git_where#refs\/heads\/}
+	branch=${branch#remotes\/origin\/}
 
 	[[ $base_url == *bitbucket* ]] && tree="src" || tree="tree"
 	url="$base_url/$tree/$branch$relative_path"
@@ -328,7 +329,7 @@ dbs() {
 		local t="session"
 	fi
 
-	dbus-send --$t --dest=org.freedesktop.DBus \
+	dbus-send --"$t" --dest=org.freedesktop.DBus \
 		--type=method_call	--print-reply \
 		/org/freedesktop/DBus org.freedesktop.DBus.ListNames
 }
@@ -453,11 +454,9 @@ govendorcheck() {
 }
 
 restart_gpgagent(){
-	# Restart the gpg agent.
-	# shellcheck disable=SC2046
-	kill -9 $(pidof scdaemon) >/dev/null 2>&1
-	# shellcheck disable=SC2046
-	kill -9 $(pidof gpg-agent) >/dev/null 2>&1
+	# Restart this user's gpg agent; pidof does not exist on macOS.
+	gpgconf --kill scdaemon
+	gpgconf --kill gpg-agent
 	gpg-connect-agent /bye >/dev/null 2>&1
 	gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
 }
@@ -471,4 +470,18 @@ homeMonitorSetup() {
 	xrandr --output eDP-1 --primary --mode 3840x2160 --rate 60 --below DP-2-2 \
 		--output DP-2-2 --mode 3840x2160 --rate 60  --rotate normal --pos 0x900  \
 		--output DP-1-2 --mode 3840x2160 --rate 60  --rotate left --pos 3840x0
+}
+
+# Set the git author and committer for this shell session only. On an account
+# several people share, `git config --global user.*` would sign everyone's
+# commits with one name.
+# Usage: iam "Your Name" you@example.com
+iam() {
+	if [[ $# -ne 2 ]]; then
+		echo "usage: iam \"Your Name\" you@example.com" >&2
+		return 1
+	fi
+	export GIT_AUTHOR_NAME="$1" GIT_COMMITTER_NAME="$1"
+	export GIT_AUTHOR_EMAIL="$2" GIT_COMMITTER_EMAIL="$2"
+	echo "git identity for this session: $1 <$2>"
 }
