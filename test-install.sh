@@ -6,7 +6,6 @@ set -e
 set -o pipefail
 
 home=$(mktemp -d)
-mkdir -p "${home}/.gnupg"
 make dotfiles HOME="${home}" "$@"
 
 login_shell() {

@@ -38,12 +38,12 @@ dotfiles: ## Installs the dotfiles.
 	for file in $(shell find $(CURDIR) -name ".*" -not -name ".gitignore" -not -name ".github" -not -name ".git" -not -name ".*.swp" -not -name ".gnupg" -not -name ".claude" -not -name ".temp" -not -name ".config" $(DOTFILES_SKIP)); do \
 		f=$$(basename $$file); \
 		ln -sfn $$file $(HOME)/$$f; \
-	done; \
-	gpg --list-keys || true;
+	done;
 	mkdir -p -m 700 $(HOME)/.gnupg;
+	gpg --list-keys || true;
 	ln -sfn $(CURDIR)/.gnupg/gpg.conf $(HOME)/.gnupg/gpg.conf;
 	ln -sfn $(CURDIR)/.gnupg/gpg-agent.conf $(HOME)/.gnupg/gpg-agent.conf;
-	ln -fn $(CURDIR)/gitignore $(HOME)/.gitignore;
+	ln -sfn $(CURDIR)/gitignore $(HOME)/.gitignore;
 	ln -sfn $(CURDIR)/.gittemplates $(HOME)/.gittemplates;
 	git update-index --skip-worktree $(CURDIR)/.gitconfig;
 	ln -snf $(CURDIR)/.bash_profile $(HOME)/.profile;
