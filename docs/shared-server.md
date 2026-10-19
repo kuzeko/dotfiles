@@ -7,14 +7,34 @@ the account without stepping on each other.
 
 ## Installing, once per server
 
-Log in as the shared account and run:
+Log in as the shared account. Server images often lack `make`, so install
+the prerequisites first (Debian and Ubuntu):
+
+```console
+sudo apt-get update
+sudo apt-get install -y git make gnupg screen htop unzip
+```
+
+Then clone the repository and check that nothing is missing:
 
 ```console
 git clone https://github.com/kuzeko/dotfiles.git
 cd dotfiles
 git checkout -b local
+make requirements
+```
+
+`make requirements` names each missing command, or prints "All required
+commands are installed." Install whatever it names, then run:
+
+```console
 make dotfiles
 ```
+
+Log out and back in. The prompt changes to two lines, with the host name
+followed by ⚡️ on a virtual machine. If it does not, check that
+`~/.bash_profile`, `~/.bashrc` and `~/.bash_prompt` are symlinks into the
+clone.
 
 On Linux, `make` defaults to `PROFILE=server`: shell and git configuration
 only, without the X11 and i3 files or the `.dockerfunc` container wrappers.
