@@ -62,6 +62,26 @@ prompt_git() {
 	fi;
 }
 
+# The prompt shows the active virtual environment itself, so the activate
+# script must not prepend it as well.
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+prompt_venv() {
+	[ -n "${VIRTUAL_ENV}" ] || return;
+
+	# Older Python writes the name as "(name) ", newer ones as "name", and
+	# a default name is just the folder, such as ".venv": then use the
+	# project folder that holds it.
+	local name="${VIRTUAL_ENV_PROMPT#(}";
+	name="${name% }";
+	name="${name%)}";
+	case "${name}" in
+		''|.venv|venv|.env|env) name="$(basename "$(dirname "${VIRTUAL_ENV}")")";;
+	esac;
+
+	echo -e "${1}(${name} venv)";
+}
+
 emoji="🛡️ "
 if [[ -f /proc/cpuinfo ]] && grep -q "^flags.* hypervisor" /proc/cpuinfo && [[ ! -d "/mnt/c/Windows/" ]]; then
 	emoji="⚡️ "
@@ -123,6 +143,7 @@ PS1+="\\[${hostStyle}\\]\\h${emoji}"; # host
 PS1+="\\[${white}\\] in ";
 PS1+="\\[${green}\\]\\w"; # working directory
 PS1+="\$(prompt_git \"${white} on ${violet}\")"; # Git repository details
+PS1+="\$(prompt_venv \" ${yellow}\")"; # Active virtual environment
 PS1+="\\n";
 PS1+="\\[${white}\\]\$ \\[${reset}\\]"; # `$` (and reset color)
 export PS1;
