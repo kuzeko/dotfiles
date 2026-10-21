@@ -100,7 +100,7 @@ keygen: ## Generates SSH key if this is not already present.
 .PHONY: requirements
 requirements: ## Checks for commands to be installed.
 	@missing=0; \
-	for cmd in 'mapfile' 'screen' 'htop' 'gpg-connect-agent' 'unzip' $(if $(filter desktop,$(PROFILE)),'docker' 'xclip'); do \
+	for cmd in 'mapfile' 'git-lfs' 'screen' 'htop' 'gpg-connect-agent' 'unzip' $(if $(filter desktop,$(PROFILE)),'docker' 'xclip'); do \
 		command -v $$cmd >/dev/null 2>&1 || { echo >&2 "$$cmd is not installed."; missing=1; } \
 	done; \
 	if [ $$missing -eq 0 ]; then echo "All required commands are installed."; fi

@@ -12,7 +12,7 @@ the prerequisites first (Debian and Ubuntu):
 
 ```console
 sudo apt-get update
-sudo apt-get install -y git make gnupg screen htop unzip
+sudo apt-get install -y git git-lfs make gnupg screen htop unzip
 ```
 
 Then clone the repository and check that nothing is missing:
