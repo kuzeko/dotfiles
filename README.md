@@ -25,6 +25,9 @@ make PROFILE=desktop
 For a server account that several people log into, follow
 [docs/shared-server.md](docs/shared-server.md) instead.
 
+For upkeep such as freeing disk space, see
+[docs/maintenance.md](docs/maintenance.md).
+
 This repo contains also files/configurations to be deployed globally in the `etc` directory.
 They may be dangerous for your system, please review the contents in the `etc/`folder before proceeding (e.g., check `etc/ssh/`).
 
