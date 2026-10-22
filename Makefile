@@ -10,9 +10,8 @@ else
 	PROFILE ?= server
 endif
 
-SERVER_SKIP := .dockerfunc .fonts .gtkrc .i3 .irssi .mpd.conf \
-	.rainbow_config.json .urxvt .Xdefaults .Xprofile .Xresources .xsessionrc \
-	.gitconfig .bash_sessions_disable
+SERVER_SKIP := .dockerfunc .fonts .i3 .irssi .urxvt .Xdefaults .Xprofile \
+	.Xresources .xsessionrc .gitconfig .bash_sessions_disable
 ifeq ($(PROFILE), server)
 	DOTFILES_SKIP := $(foreach f,$(SERVER_SKIP),-not -name "$(f)")
 endif
