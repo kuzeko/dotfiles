@@ -465,13 +465,6 @@ gitsetoriginnopush() {
 	git remote set-url --push origin no_push
 }
 
-homeMonitorSetup() {
-	# This function sets the xrandr display modes for my desk in NYC.
-	xrandr --output eDP-1 --primary --mode 3840x2160 --rate 60 --below DP-2-2 \
-		--output DP-2-2 --mode 3840x2160 --rate 60  --rotate normal --pos 0x900  \
-		--output DP-1-2 --mode 3840x2160 --rate 60  --rotate left --pos 3840x0
-}
-
 # Set the git author and committer for this shell session only. On an account
 # several people share, `git config --global user.*` would sign everyone's
 # commits with one name.
@@ -496,4 +489,11 @@ iam() {
 	export GIT_AUTHOR_NAME="$name" GIT_COMMITTER_NAME="$name"
 	export GIT_AUTHOR_EMAIL="$email" GIT_COMMITTER_EMAIL="$email"
 	echo "git identity for this session: $name <$email>"
+}
+
+# Create the uv virtual environment of the current project and activate it.
+uv_venv() {
+	uv venv
+	# shellcheck source=/dev/null
+	source .venv/bin/activate
 }
